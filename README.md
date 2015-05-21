@@ -1,10 +1,10 @@
-# rails_test
-== README
+# Rails Test Project :)
+
 
 ##Need to create a pluginable module for easy ActiveRecord and Predefine hstore based fields import and export.
 
 
-* a model will have a properties (hstore type field)
+* a model will have a field called `properties` (hstore type field)
 * a model will associate to a form which defines the data structures of this properties field.
 * your work can be a concern which can be easily added to any model.
 * your work should implement following 3 methods
@@ -12,14 +12,16 @@
    b) import(xls_file, form optional) --- which will populate this model's property field. an optional form parameter is here, in case this model doesn't have a static link to a form object.
    c) self.batch_import(xls, form option) ---- which will add multiple records.
 
+##ERD Diagram.
 
+![](https://github.com/triosky/rails_test/blob/master/assets/screen3.png)
 
 ##Sample Data and Use case.
 
-![](https://github.com/triosky/forms/blob/master/assets/screen1.png)
+![](https://github.com/triosky/rails_test/blob/master/assets/screen1.png)
 
 ###form data
-```
+```ruby
 #<Form:0x007ff74ab7b120> {
               :id => 7,
       :creator_id => nil,
@@ -80,7 +82,7 @@
 
 ###User Data
 
-```
+```ruby
 #<FormEntry:0x007ff7426d2040> {
              :id => 1,
         :form_id => 7,
@@ -100,10 +102,10 @@
 
 
 ##Advanced Implicit Data and Use case. (Predefined Form)
-![](https://github.com/triosky/forms/blob/master/assets/screen2.png)
+![](https://github.com/triosky/rails_test/blob/master/assets/screen2.png)
 
 ###form data
-```
+```ruby
 #<Form:0x007ff749645030> {
               :id => 6,
       :creator_id => nil,
@@ -276,7 +278,7 @@
 
 ###User Data
 
-```
+```ruby
 #<User:0x007ff742539350> {
                         :id => 1,
                      :email => "z@a.com",
