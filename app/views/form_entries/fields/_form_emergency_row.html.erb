@@ -1,0 +1,29 @@
+<% emergency ||= OpenStruct.new({}) %>
+<%= fe.fields_for "#{question.id.to_s}", OpenStruct.new(emergency), index:"" do |f_row| %>
+  <div class="row emergency-entry">
+    <div class="col-xs-4">
+      <div class="form-group">
+        <%= f_row.input_field :name, class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="col-xs-4">
+      <div class="form-group">
+        <%= f_row.input_field :relationship, class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="col-xs-4 pr0">
+      <div class="form-group">
+        <div class="input-group alt">
+          <%= f_row.input_field :phone_number, class: 'form-control' %>
+          <div class="input-group-addon">
+            <button type="button" class="btn btn-link btn-delete-row" onclick="$(this).closest('.emergency-entry').remove()">
+              <i class="pi pi-minus text-danger"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

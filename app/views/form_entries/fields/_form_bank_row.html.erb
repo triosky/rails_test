@@ -1,0 +1,27 @@
+<% bank ||= OpenStruct.new({}) %>
+<%= fe.fields_for "#{question.id.to_s}", OpenStruct.new(bank), index:"" do |f_row| %>
+  <div class="row bank-entry">
+    <div class="col-xs-3">
+      <%= f_row.input_field :bank_name, class: 'form-control' %>
+    </div>
+
+    <div class="col-xs-2 no-horizontal-padding">
+      <%= f_row.input_field :bank_type, collection: question.properties['bank_account_types'].map{ |type| [type['label'], type['value']] }, class: 'form-control', prompt: t('.select') %>
+    </div>
+
+    <div class="col-xs-3">
+      <%= f_row.input_field :routing, class: 'form-control' %>
+    </div>
+
+    <div class="col-xs-4">
+      <div class="input-group alt">
+        <%= f_row.input_field :account_number, class: 'form-control' %>
+        <div class="input-group-addon vertical-bottom">
+          <button type="button" class="btn btn-link btn-delete-row" onclick="$(this).closest('.bank-entry').remove()">
+            <i class="pi pi-minus text-danger"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

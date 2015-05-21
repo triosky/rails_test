@@ -1,0 +1,27 @@
+<% unique_id = defined?(idx) ? idx : 'UNIQUE_ID' %>
+<% row_hash ||= {} %>
+
+<%= f.fields_for "#{question.id.to_s}" do |fp| %>
+  <%= fp.fields_for "#{ unique_id  }", OpenStruct.new(row_hash) do  |fr| %>
+    <div class="row group-qusetion-row">
+      <% question.properties['groups'].each do |key, group| %>
+        <div class="<%= build_class_question_group_column(question) %>">
+          <div class="<%= group['add_on'] == 'prepend' || group['add_on'] == 'append' ? 'input-group' : 'input' %> string">
+            <% if group['add_on'] == 'prepend' %>
+              <span class="input-group-addon"><%= group['add_on_value'] %></span>
+            <% end %>
+            <%= fr.text_field key.to_s, class: 'form-control' %>
+            <% if group['add_on'] == 'append' %>
+              <span class="input-group-addon"><%= group['add_on_value'] %></span>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+
+      <!-- no need remove link for the first row -->
+      <% if unique_id != '0' %>
+        <div class="col-xs-2"><%= link_to 'remove', 'javascript:;', class: 'btn btn-danger', 'onclick' => "$(this).closest('.row').remove()" %></div>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

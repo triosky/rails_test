@@ -1,0 +1,5 @@
+<!-- email -->
+<%= f.input question.id.to_s, label:  question.properties['label'], hint:  question.properties['hint'], required: question.required, wrapper: :prepend do %>
+  <span class="input-group-addon">@</span>
+  <%= f.input_field question.id.to_s, as: :email, class: 'form-control' %>
+<% end %>

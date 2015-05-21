@@ -1,0 +1,5 @@
+<!-- percentage -->
+<%= f.input question.id.to_s, label:  question.properties['label'], hint:  question.properties['hint'], required: question.required, wrapper: :prepend do %>
+  <%= f.input_field question.id.to_s, as: :integer, min: 0, max: 100, class: 'form-control' %>
+  <span class="input-group-addon">%</span>
+<% end %>

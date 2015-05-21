@@ -1,0 +1,59 @@
+<<<<<<< Updated upstream
+<div class="row" ng-controller="FormEntryCtrl" ng-cloak="true" ng-init="answers = <%= @entry.answers.to_json %>;">
+  <div class="col-md-12 tasks">
+    <% if @entry.can_approve?(current_user) %>
+      <div class="sticky-header">
+        <div class="content-wrapper">
+          <div class="breadcrumb">
+            <%= link_to raw("<i class='pi pi-arrow-back'></i> #{t('.back_to_tasks')}"), company_tasks_path %>
+          </div>
+          <div class="page-actions">
+            <%= link_to t('.approve'), change_status_company_task_path(@entry, 'approve'), method: :put, class: "btn btn-sm btn-primary" %>
+            <%= link_to t('.cancel'), change_status_company_task_path(@entry, 'cancel'), method: :put, class: "btn btn-sm btn-warning", data: { confirm: 'Are you sure to cancel this task?' } %>
+            <div class="dropdown">
+              <%= link_to raw(" #{t('.assign_to')} <span class=\"caret\"></span>"), 'javascript:void(0)', class: "btn btn-sm btn-secondary dropdown-toggle", 'ng-click' => "editParentTask()" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="heading">
+      <span class="circle-icon fa <%= @form.icon %>"></span>
+      <h2><%= @form.name %></h2>
+      <span class="task-detail-description"><%= @form.introduction %></span>
+      <br />
+      <h4 class="status-label">
+        <span class="label label-<%= @entry.status %>"><%= @entry.status.upcase %></span>
+      </h4>
+
+      <div class="attributes">
+        <span>
+          <i class="pi pi-clock"></i>
+          <%= time_ago_in_words(@entry.created_at) %> ago
+        </span>
+
+        <span>
+          <i class="pi pi-person"></i>Submitted By
+          <a href="#"><%= @entry.user.try(:name) %></a>
+        </span>
+      </div>
+    </div>
+
+    <%= simple_form_for @entry, url: company_task_path(@entry.id, form_id: @form.id), method: :put, html: { class: 'dynamic-form-entry', id: 'new-entry-form' } do |f| %>
+      <%= render 'form', f: f, form: @form, entry: @entry %>
+
+      <div class="form-actions">
+        <%= f.button :submit, "Update", class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+</div>
+=======
+<% content_for :javascript do %>
+<script type="text/javascript">
+var task_data = <%=raw render(template: 'private/form_entries/show.json.jbuilder')%>;
+</script>
+<%end%>
+<%= react_component('FormApp') %>
+>>>>>>> Stashed changes

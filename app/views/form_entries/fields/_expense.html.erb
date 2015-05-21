@@ -1,0 +1,58 @@
+<% @entry.answers ||= {} %>
+<% expenses_hash  = @entry.answers[question.id.to_s] || {} %>
+
+<div id="expense-field-<%= question.id %>" class="expense-detail dyno-expense-field">
+    <script type="text/javascript">
+      window.form_expense_row_partials || (window.form_expense_row_partials = {});
+      window.form_expense_row_partials[<%= question.id %>] = "<%=j render('/private/form_entries/fields/form_expense_row', question: question, fe: f, new_entry: true) %>";
+    </script>
+
+    <div class="form-group">
+      <label class="control-label"><%= question.properties['label'] %></label>
+    </div>
+
+    <div class="table-view no-border">
+      <table id="expense-detail-table" class="table table-bordered">
+        <thead>
+          <tr>
+            <th><%= t('.status') %></th>
+            <th><%= t('.date') %></th>
+            <th><%= t('.category') %></th>
+            <th><%= t('.description') %></th>
+            <th class="text-right"><%= t('.amount') %></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% expenses_hash.each do |key, expense| %>
+            <tr class="edit-task">
+              <td>
+                <% if expense['status'] == 'paid' %>
+                  <i class="pi pi-check-circle-o"></i>
+                <% end %>
+              </td>
+              <td><%= expense['date'] %></td>
+              <td><span><%= form_entry_properties_selected_text(question, 'categories', expense['expense_type']) %></span></td>
+              <td><%= expense['memo'] %></td>
+              <td class="amount">
+                <span><%= expense['currency'] %> <%= sprintf('%.2f', expense['rate'].to_f * expense['amount'].to_f) %></span>
+                <br>
+                <span class="text-muted"><%= expense['currency'] %><%= sprintf('%.2f', expense['amount']) %>@<%= sprintf('%.2f', expense['rate'].to_f) %></span>
+              </td>
+            </tr>
+
+
+            <tr class="form-row-edit">
+              <td colspan="5">
+                <%= render '/private/form_entries/fields/form_expense_row', fe: f, expense: expense, key: key, expense: expense, question: question, new_entry: false %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <%= link_to '#', 'ng-click' => "addRowExpense(#{question.id})" do %>
+      <i class='pi pi-plus'></i>
+      <%= t('.add_new_entry') %>
+    <% end %>
+</div>

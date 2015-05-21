@@ -1,0 +1,2 @@
+<!-- rating -->
+<%= f.input question.id.to_s, as: :radio_buttons, label:  question.properties['label'], hint:  question.properties['hint'], collection: build_rating_options(question), required: question.required, item_wrapper_class: "#{(question.properties['format'] == 'inline') ? 'radio-inline' : 'radio'}" %>

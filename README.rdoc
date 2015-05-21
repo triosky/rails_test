@@ -1,4 +1,3 @@
-# rails_test
 == README
 
 ##Need to create a pluginable module for easy ActiveRecord and Predefine hstore based fields import and export.

@@ -1,0 +1,43 @@
+<% answers ||= [{"name"=>"", "relationship"=>"", "phone_number"=>""}] %>
+<div id="emergency-field-<%= question.id %>" class="emergency-detail dyno-emergency-field">
+    <script type="text/javascript">
+      window.form_emergency_row_partials || (window.form_emergency_row_partials = {});
+      window.form_emergency_row_partials[<%= question.id %>] = "<%=j render('/private/form_entries/fields/form_emergency_row', question: question, fe: f, new_entry: true) %>";
+    </script>
+    <!-- Row -->
+    <div class="row dynamic-rows">
+      <div class="col-xs-4">
+        <div class="form-group">
+          <label><%= t('.name')%></label>
+        </div>
+      </div>
+
+      <div class="col-xs-4">
+        <div class="form-group">
+          <label><%= t('.relationship')%></label>
+        </div>
+      </div>
+
+      <div class="col-xs-4 pr0">
+        <div class="form-group">
+          <div class="input-group alt">
+            <label><%= t('.phone_number')%></label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- rows -->
+    <div class="emergency-lists">
+      <% answers.each do |emergency| %>
+        <%= render '/private/form_entries/fields/form_emergency_row', fe: f, emergency: emergency, question: question, new_entry: false %>
+      <% end %>
+    </div>
+
+    <!-- End Row -->
+    <%= link_to 'javascript:void(0)', class: 'btn btn-link no-padding', 'ng-click'=> "addRowEmergency(#{question.id})" do %>
+      <i class="pi pi-plus"></i>
+      <%= t('.add_a_new_contact')%>
+    <% end %>
+</div>
+<!-- End Emergency Contact -->

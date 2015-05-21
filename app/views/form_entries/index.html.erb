@@ -1,0 +1,29 @@
+<% content_for :subnav do %>
+  <div class="subnav">
+    <ul>
+      <li class="active"><%= link_to 'ALL TASKS', 'javascript:;' %></li>
+      <li><%= link_to 'YOUR TASKS', 'javascript:;' %></li>
+    </ul>
+  </div>
+<% end %>
+
+<div class="pages tasks">
+  <div flash-alert="success" active-class="in alert" class="fade">
+    <span class="alert-message">{{flash.message}}</span>
+  </div>
+  <div class="page-title">
+    <h1 class="pull-left"><%= t('.manage_tasks') %></h1>
+    <div class="dropdown pull-right">
+      <a class="btn btn-lg btn-primary dropdown-toggle"><i class="pi pi-plus"></i><%= t('.create_new') %><i class="pi pi-arrow-drop-down"></i></a>
+      <div class="dropdown-menu">
+        <div class="arrow"></div>
+        <ul>
+          <% @forms.each do |form| %>
+            <li><%= link_to form.name, new_company_task_path(form_id: form.id) %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <%= react_component('TaskList', render(template: 'private/form_entries/index.json.jbuilder')) %>
+</div>

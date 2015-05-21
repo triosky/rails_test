@@ -1,0 +1,5 @@
+<!-- date -->
+<%= f.input question.id.to_s, label: question.properties['label'], hint: question.properties['hint'], required: question.required, wrapper: :prepend do %>
+  <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+  <%= f.input_field question.id.to_s, as: :string, class: 'datepicker form-control', placeholder: question.properties['placeholder'] %>
+<% end %>

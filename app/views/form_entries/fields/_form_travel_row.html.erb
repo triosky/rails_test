@@ -1,0 +1,111 @@
+<% travel ||= OpenStruct.new({}) %>
+<% key ||= 'UNIQUE_ID' %>
+
+
+<%= fe.fields_for key.to_s, OpenStruct.new(travel) do |f_row| %>
+  <div class="block block-secondary travel-entry">
+    <div class="block-body">
+      <%= f_row.hidden_field :status, class: 'status-field', value: travel['status'] || 'pending' %>
+
+      <div class="row">
+        <div class="col-xs-3">
+          <%= f_row.input :from, label: t('.from') %>
+        </div>
+        <div class="col-xs-3">
+          <label><%= t('.date') %></label>
+          <div class="input-group">
+            <div class="input-icon">
+              <span class="input-group-addon"><i class="pi pi-calendar"></i></span>
+              <%= f_row.text_field :from_date, class: 'form-control datepicker', 'data-date-format' => 'yyyy-MM-dd' %>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-3">
+          <%= f_row.input :prefer_time_from, collection: [['Morning', 'morning'], ['Night', 'night']], required: false, label: t('.time'), include_blank: false %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-3">
+          <%= f_row.input :to, label: t('.to') %>
+        </div>
+        <div class="col-xs-3">
+          <div class="form-group">
+            <label><%= t('.date') %></label>
+            <div class="input-group">
+              <div class="input-icon">
+                <span class="input-group-addon"><i class="pi pi-calendar"></i></span>
+                <%= f_row.text_field :to_date, class: 'form-control datepicker', 'data-date-format' => 'yyyy-MM-dd' %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-3">
+          <%= f_row.input :prefer_time_to, collection: [['Morning', 'morning'], ['Night', 'night']], required: false, label: t('.time'), include_blank: false %>
+        </div>
+        <div class="col-xs-3 custom-checkbox">
+          <label>
+            <%= f_row.check_box :round_trip %>
+            <span class="input-checkbox"></span>
+            <%= t('.round_trip') %>
+          </label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-3">
+          <%= f_row.input :transportation, collection: question.properties['transportations'].values.map{|x| [x['label'], x['value']]}, required: false, label: t('.transportation'), include_blank: false %>
+        </div>
+        <div class="col-xs-3">
+          <%= f_row.input :transportation_class, collection: question.properties['classes'].values.map{|x| [x['label'], x['value']]}, required: false, label: t('.class'), include_blank: false %>
+        </div>
+        <div class="col-xs-6 custom-checkbox">
+          <label>
+            <%= f_row.check_box :car_rental %>
+            <span class="input-checkbox"></span>
+            <i class="pi pi-car"></i><%= t('.car_rental') %>
+          </label>
+          <label class="ml10">
+            <%= f_row.check_box :hotel %>
+            <span class="input-checkbox"></span>
+            <i class="pi pi-hotel"></i><%= t('.hotel_rental') %>
+          </label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <%= f_row.input :memo, as: :text, label: t('.memo'), required: false, placeholder: 'Youre memo here....' %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <% if new_entry %>
+            <div class="pull-left">
+              <button type="submit" class="btn btn-sm btn-primary"><%= t('.save') %></button>
+              <%= link_to t('.cancel'), 'javascript:;', class: "btn link-gray btn-link" , onclick: "$(this).closest('.block-secondary').remove()" %>
+            </div>
+          <% else %>
+            <div class="pull-left">
+              <button type="submit" class="btn btn-sm btn-primary" ><%= t('.save') %></button>
+              <% unless travel['status'] == 'booked' %>
+                <button type="submit" class="btn btn-sm btn-green" onclick="$(this).closest('.travel-entry').find('.status-field').val('booked')">
+                  <%= t('.booked') %>
+                </button>
+              <% end %>
+              <%= link_to t('.cancel'), 'javascript:;', class: "btn link-gray btn-link link-cancel" %>
+            </div>
+          <% end %>
+
+          <% unless new_entry %>
+            <div class="pull-right">
+              <%= link_to raw("<i class='pi pi-trash-o text-danger'></i> #{t('common.delete')}"), 'javascript:;', class: "btn btn-link link-gray", onclick: "$(this).closest('.travel-row').remove()" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+    </div>
+  </div>
+<% end %>

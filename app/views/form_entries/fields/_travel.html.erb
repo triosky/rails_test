@@ -1,0 +1,79 @@
+<% @entry.answers ||= {} %>
+<% travels_hash  = @entry.answers[question.id.to_s] || {} %>
+
+
+<div id="travel-field-<%= question.id %>" class="travel-detail dyno-travel-field">
+  <%= f.fields_for "#{question.id.to_s}" do |fe| %>
+    <script type="text/javascript">
+      window.form_travel_row_partials || (window.form_travel_row_partials = {});
+      window.form_travel_row_partials[<%= question.id %>] = "<%=j render('/private/form_entries/fields/form_travel_row', question: question, fe: fe, new_entry: true) %>";
+    </script>
+
+    <div class="form-group">
+      <label class="control-label"><%= question.properties['label'] %></label>
+    </div>
+
+    <div class="list-group">
+      <% travels_hash.each do |key, travel| %>
+        <div class="travel-row block block-default list-block" title="click to edit">
+          <div class="block-body">
+            <div class="task-detail-small">
+              <span class="circle-icon icon-black <%= travel_transportation_icon(travel) %>"></span>
+              <h4 class="block-title">
+                <%= travel['from'] %>
+                <i class="pi pi-long-arrow-right"></i>
+                <%= travel['to'] %>
+                <span class="label label-<%= (travel['status'] || 'pending') %>"><%= (travel['status'] || 'pending').upcase %></span>
+              </h4>
+
+              <span class="list-desc">
+                <%= travel['from_date'] %>
+                &nbsp; to &nbsp;
+                <%= travel['to_date'] %>
+              </span>
+
+              <div class="attributes">
+                <span class="dot-separator">
+                  <%= form_entry_properties_selected_text(question, 'classes', travel['transportation_class']) %>
+                </span>
+                <span class="mr10">
+                  <% if travel['round_trip'] == '1'%>
+                    <%= t('.two_way') %>
+                  <% else %>
+                    <%= t('.one_way') %>
+                  <% end %>
+                </span>
+                <div class="icons">
+                  <span>
+                    <i class="pi <%= travel['prefer_time_from'] == 'morning' ? 'pi-morning' : 'pi-night' %>"></i>
+                    <span class="slash">/</span>
+                    <i class="pi <%= travel['prefer_time_to'] == 'morning' ? 'pi-morning' : 'pi-night' %>"></i>
+                  </span>
+                  <% if travel['car_rental'] == '1' %>
+                    <i class="pi pi-car"></i>
+                  <% end %>
+
+                  <% if travel['hotel'] == '1' %>
+                    <i class="pi pi-hotel"></i>
+                  <% end %>
+                </div>
+              </div>
+              <span class="edit-label pull-right">Edit</span>
+            </div>
+          </div>
+
+          <div class="travel-row-editing">
+            <%= render('/private/form_entries/fields/form_travel_row', question: question, fe: fe, new_entry: false, travel: travel, key: key) %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%= link_to 'javascript:void(0)', 'ng-click' => "addRowTravel(#{question.id})" do %>
+    <i class='pi pi-plus'></i>
+    <%= t('.add_new_entry') %>
+  <% end %>
+</div>
+
+

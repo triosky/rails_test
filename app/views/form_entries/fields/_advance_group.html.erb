@@ -1,0 +1,43 @@
+<% @entry.answers ||= {} %>
+<% question_group_hash = @entry.answers[question.id.to_s] %>
+<% question_group_hash ||= { "0" => {} } %>
+
+<!-- question_group -->
+<div class="question-group-container">
+  <%= f.label question.id, class: 'control-label' do %>
+    <% if question.required %>
+      <abbr title="required">*</abbr>
+    <% end %>
+    <%= question.properties['label'] %>
+  <% end %>
+
+  <script type="text/javascript">
+    window.advance_row_question_groups || (window.advance_row_question_groups = {});
+    window.advance_row_question_groups[<%= question.id %>] = "<%=j render('/private/form_entries/fields/advance_group_row', f: f, question: question) %>";
+  </script>
+
+  <div class="question-group-rows" id="question-advance-group-<%= question.id %>">
+    <div class="row">
+      <% question.properties['advance_groups'].each do |key, advance_group| %>
+        <div class="<%= build_class_advance_question_group_column(question) %>">
+          <strong><%= advance_group['name'] %></strong>
+        </div>
+      <% end %>
+      <div class="col-xs-2">&nbsp;</div>
+    </div>
+
+    <% question_group_hash.each do |key, value| %>
+      <%= render '/private/form_entries/fields/advance_group_row', f: f, question: question, idx: key, row_hash: value %>
+    <% end %>
+  </div>
+
+  <p><%= link_to 'Add row', '', class: 'btn btn-xs btn-primary', 'ng-click' => "addRowAdvanceQuestionGroup(#{question.id})" %></p>
+
+  <% if question.properties['hint'].present? %>
+    <div class="row">
+      <div class="col-xs-12">
+        <p class="help-block"><%= question.properties['hint'] %></p>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,380 @@
+Form Load (1.2ms)  SELECT "forms".* FROM "forms"
+#<Form:0x007fa162743e10> {
+             :id => 1,
+     :creator_id => nil,
+     :company_id => 1,
+           :name => "Personal Information",
+   :introduction => nil,
+     :created_at => Wed, 20 May 2015 13:08:04 SGT +08:00,
+     :updated_at => Wed, 20 May 2015 13:08:04 SGT +08:00,
+           :icon => nil
+}
+ FormField Load (2.1ms)  SELECT "form_fields".* FROM "form_fields"  WHERE "form_fields"."form_id" = $1  [["form_id", 1]]
+[
+   [0] #<FormField:0x007fa15ce737e0> {
+               :id => 1,
+          :form_id => 1,
+       :field_type => "personal",
+             :name => "Personal Information",
+         :required => false,
+       :properties => {
+                               "label" => "Personal",
+                    "personal_genders" => [
+               [0] {
+                   "label" => "Male",
+                   "value" => "male"
+               },
+               [1] {
+                   "label" => "Female",
+                   "value" => "female"
+               }
+           ],
+           "personal_marital_statuses" => [
+               [0] {
+                   "label" => "Single",
+                   "value" => "single"
+               },
+               [1] {
+                   "label" => "Married",
+                   "value" => "married"
+               },
+               [2] {
+                   "label" => "Divoced",
+                   "value" => "divoced"
+               },
+               [3] {
+                   "label" => "Widowed",
+                   "value" => "widowed"
+               }
+           ]
+       },
+         :position => 0,
+       :created_at => Wed, 20 May 2015 13:08:04 SGT +08:00,
+       :updated_at => Wed, 20 May 2015 13:08:04 SGT +08:00
+   }
+]
+#<Form:0x007fa164800d38> {
+             :id => 2,
+     :creator_id => nil,
+     :company_id => 1,
+           :name => "Emergency Contact Information",
+   :introduction => nil,
+     :created_at => Wed, 20 May 2015 13:08:04 SGT +08:00,
+     :updated_at => Wed, 20 May 2015 13:08:04 SGT +08:00,
+           :icon => nil
+}
+ FormField Load (0.3ms)  SELECT "form_fields".* FROM "form_fields"  WHERE "form_fields"."form_id" = $1  [["form_id", 2]]
+[
+   [0] #<FormField:0x007fa15de3da40> {
+               :id => 2,
+          :form_id => 2,
+       :field_type => "emergency",
+             :name => "Emergency Contact Information",
+         :required => false,
+       :properties => {
+           "label" => "Emergency"
+       },
+         :position => 1,
+       :created_at => Wed, 20 May 2015 13:08:04 SGT +08:00,
+       :updated_at => Wed, 20 May 2015 13:08:04 SGT +08:00
+   }
+]
+#<Form:0x007fa164800798> {
+             :id => 3,
+     :creator_id => nil,
+     :company_id => 1,
+           :name => "Bank Account Information",
+   :introduction => nil,
+     :created_at => Wed, 20 May 2015 13:08:04 SGT +08:00,
+     :updated_at => Wed, 20 May 2015 13:08:04 SGT +08:00,
+           :icon => nil
+}
+ FormField Load (0.2ms)  SELECT "form_fields".* FROM "form_fields"  WHERE "form_fields"."form_id" = $1  [["form_id", 3]]
+[
+   [0] #<FormField:0x007fa16253ba28> {
+               :id => 3,
+          :form_id => 3,
+       :field_type => "bank",
+             :name => "Bank Account Information",
+         :required => false,
+       :properties => {
+                        "label" => "Bank",
+           "bank_account_types" => [
+               [0] {
+                   "label" => "Checking",
+                   "value" => "checking"
+               },
+               [1] {
+                   "label" => "Saving",
+                   "value" => "saving"
+               }
+           ]
+       },
+         :position => 2,
+       :created_at => Wed, 20 May 2015 13:08:04 SGT +08:00,
+       :updated_at => Wed, 20 May 2015 13:08:04 SGT +08:00
+   }
+]
+#<Form:0x007fa1648002e8> {
+             :id => 4,
+     :creator_id => nil,
+     :company_id => 1,
+           :name => "Tax Information",
+   :introduction => nil,
+     :created_at => Wed, 20 May 2015 13:08:04 SGT +08:00,
+     :updated_at => Wed, 20 May 2015 13:08:04 SGT +08:00,
+           :icon => nil
+}
+ FormField Load (0.3ms)  SELECT "form_fields".* FROM "form_fields"  WHERE "form_fields"."form_id" = $1  [["form_id", 4]]
+[
+   [0] #<FormField:0x007fa15de2eea0> {
+               :id => 4,
+          :form_id => 4,
+       :field_type => "tax",
+             :name => "Tax Information",
+         :required => false,
+       :properties => {
+                                     "label" => "Tax",
+                 "tax_decline_with_holdings" => [
+               [0] {
+                   "label" => "Yes",
+                   "value" => "1"
+               },
+               [1] {
+                   "label" => "No",
+                   "value" => "0"
+               }
+           ],
+                 "tax_filling_status_prompt" => "",
+                "tax_filling_status_options" => [
+               [0] {
+                   "label" => "Joint",
+                   "value" => "joint"
+               },
+               [1] {
+                   "label" => "Single",
+                   "value" => "single"
+               }
+           ],
+           "tax_decline_with_holding_prompt" => ""
+       },
+         :position => 3,
+       :created_at => Wed, 20 May 2015 13:08:04 SGT +08:00,
+       :updated_at => Wed, 20 May 2015 13:08:04 SGT +08:00
+   }
+]
+#<Form:0x007fa15c6cbf88> {
+             :id => 5,
+     :creator_id => nil,
+     :company_id => 1,
+           :name => "Compensation",
+   :introduction => nil,
+     :created_at => Wed, 20 May 2015 13:08:04 SGT +08:00,
+     :updated_at => Wed, 20 May 2015 13:08:04 SGT +08:00,
+           :icon => nil
+}
+ FormField Load (0.5ms)  SELECT "form_fields".* FROM "form_fields"  WHERE "form_fields"."form_id" = $1  [["form_id", 5]]
+[
+   [0] #<FormField:0x007fa1622d1eb8> {
+               :id => 5,
+          :form_id => 5,
+       :field_type => "compensation",
+             :name => "Compensation",
+         :required => false,
+       :properties => {
+                             "label" => "Compensation",
+              "compensation_periods" => [
+               [0] {
+                   "label" => "Year",
+                   "value" => "year"
+               },
+               [1] {
+                   "label" => "Quarter",
+                   "value" => "quarter"
+               },
+               [2] {
+                   "label" => "Month",
+                   "value" => "Month"
+               }
+           ],
+           "compensation_currencies" => [
+               [0] {
+                   "label" => "USD",
+                   "value" => "usd"
+               },
+               [1] {
+                   "label" => "SGD",
+                   "value" => "sgd"
+               }
+           ]
+       },
+         :position => 4,
+       :created_at => Wed, 20 May 2015 13:08:04 SGT +08:00,
+       :updated_at => Wed, 20 May 2015 13:08:04 SGT +08:00
+   }
+]
+#<Form:0x007fa15c6cbbf0> {
+             :id => 6,
+     :creator_id => nil,
+     :company_id => 1,
+           :name => "Employee Additional Information",
+   :introduction => "Extra Information about an employee",
+     :created_at => Wed, 20 May 2015 13:54:30 SGT +08:00,
+     :updated_at => Wed, 20 May 2015 13:54:30 SGT +08:00,
+           :icon => "fa-group"
+}
+ FormField Load (0.4ms)  SELECT "form_fields".* FROM "form_fields"  WHERE "form_fields"."form_id" = $1  [["form_id", 6]]
+[
+   [0] #<FormField:0x007fa15dddde88> {
+               :id => 6,
+          :form_id => 6,
+       :field_type => "personal",
+             :name => "field_1432101228591",
+         :required => false,
+       :properties => {
+                                "hint" => "",
+                               "label" => "Personal",
+                    "personal_genders" => [
+               [0] {
+                   "label" => "Male",
+                   "value" => "male"
+               },
+               [1] {
+                   "label" => "Female",
+                   "value" => "female"
+               }
+           ],
+           "personal_marital_statuses" => [
+               [0] {
+                   "label" => "Single",
+                   "value" => "single"
+               },
+               [1] {
+                   "label" => "Married",
+                   "value" => "married"
+               },
+               [2] {
+                   "label" => "Divoced",
+                   "value" => "divoced"
+               },
+               [3] {
+                   "label" => "Widowed",
+                   "value" => "widowed"
+               }
+           ]
+       },
+         :position => 0,
+       :created_at => Wed, 20 May 2015 13:54:30 SGT +08:00,
+       :updated_at => Wed, 20 May 2015 13:54:30 SGT +08:00
+   },
+   [1] #<FormField:0x007fa15dddd820> {
+               :id => 7,
+          :form_id => 6,
+       :field_type => "bank",
+             :name => "field_1432101230739",
+         :required => false,
+       :properties => {
+                         "hint" => "",
+                        "label" => "Bank",
+           "bank_account_types" => [
+               [0] {
+                   "label" => "Checking",
+                   "value" => "checking"
+               },
+               [1] {
+                   "label" => "Saving",
+                   "value" => "saving"
+               }
+           ]
+       },
+         :position => 1,
+       :created_at => Wed, 20 May 2015 13:54:30 SGT +08:00,
+       :updated_at => Wed, 20 May 2015 13:54:30 SGT +08:00
+   },
+   [2] #<FormField:0x007fa15dddd0c8> {
+               :id => 8,
+          :form_id => 6,
+       :field_type => "compensation",
+             :name => "field_1432101233168",
+         :required => false,
+       :properties => {
+                              "hint" => "",
+                             "label" => "Compensation",
+              "compensation_periods" => [
+               [0] {
+                   "label" => "Year",
+                   "value" => "year"
+               },
+               [1] {
+                   "label" => "Quarter",
+                   "value" => "quarter"
+               },
+               [2] {
+                   "label" => "Month",
+                   "value" => "Month"
+               }
+           ],
+           "compensation_currencies" => [
+               [0] {
+                   "label" => "USD",
+                   "value" => "usd"
+               },
+               [1] {
+                   "label" => "SGD",
+                   "value" => "sgd"
+               }
+           ]
+       },
+         :position => 2,
+       :created_at => Wed, 20 May 2015 13:54:30 SGT +08:00,
+       :updated_at => Wed, 20 May 2015 13:54:30 SGT +08:00
+   },
+   [3] #<FormField:0x007fa15dddca10> {
+               :id => 9,
+          :form_id => 6,
+       :field_type => "emergency",
+             :name => "field_1432101231904",
+         :required => false,
+       :properties => {
+            "hint" => "",
+           "label" => "Emergency"
+       },
+         :position => 3,
+       :created_at => Wed, 20 May 2015 13:54:30 SGT +08:00,
+       :updated_at => Wed, 20 May 2015 13:54:30 SGT +08:00
+   },
+   [4] #<FormField:0x007fa15dddc420> {
+               :id => 10,
+          :form_id => 6,
+       :field_type => "tax",
+             :name => "field_1432101232574",
+         :required => false,
+       :properties => {
+                                 "hint" => "",
+                                "label" => "Tax",
+            "tax_decline_with_holdings" => [
+               [0] {
+                   "label" => "Yes",
+                   "value" => "1"
+               },
+               [1] {
+                   "label" => "No",
+                   "value" => "0"
+               }
+           ],
+           "tax_filling_status_options" => [
+               [0] {
+                   "label" => "Joint",
+                   "value" => "joint"
+               },
+               [1] {
+                   "label" => "Single",
+                   "value" => "single"
+               }
+           ]
+       },
+         :position => 4,
+       :created_at => Wed, 20 May 2015 13:54:30 SGT +08:00,
+       :updated_at => Wed, 20 May 2015 13:54:30 SGT +08:00
+   }
+]

@@ -1,0 +1,51 @@
+<% answers ||= [{"bank_name"=>"", "bank_type"=>"checking", "routing"=>"", "account_number"=>""}] %>
+<div id="bank-field-<%= question.id %>" class="bank-detail dyno-bank-field">
+    <script type="text/javascript">
+      window.form_bank_row_partials || (window.form_bank_row_partials = {});
+      window.form_bank_row_partials[<%= question.id %>] = "<%=j render('/private/form_entries/fields/form_bank_row', question: question, fe: f, new_entry: true) %>";
+    </script>
+
+    <!-- Row -->
+    <div class="row">
+      <div class="col-xs-3">
+        <div class="form-group">
+          <label><%= t('.bank_name') %></label>
+        </div>
+      </div>
+
+      <div class="col-xs-2 no-horizontal-padding">
+        <div class="form-group">
+          <label><%= t('.account_type') %></label>
+        </div>
+      </div>
+
+      <div class="col-xs-3">
+        <div class="form-group">
+          <label><%= t('.routing') %></label>
+        </div>
+      </div>
+
+      <div class="col-xs-4">
+        <div class="form-group">
+          <div class="input-group alt">
+            <label><%= t('.account_number') %></label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- rows -->
+    <div class="bank-lists dynamic-rows">
+      <% answers.each do |bank| %>
+        <%= render '/private/form_entries/fields/form_bank_row', fe: f, bank: bank, question: question, new_entry: false %>
+      <% end %>
+    </div>
+
+
+    <!-- End Row -->
+    <%= link_to 'javascript:void(0)', class: 'btn btn-link no-padding', 'ng-click'=> "addRowBank(#{question.id})" do %>
+      <i class="pi pi-plus"></i>
+      <%= t('.add_new_bank_account') %>
+    <% end %>
+
+</div>

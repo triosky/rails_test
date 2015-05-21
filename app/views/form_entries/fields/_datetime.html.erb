@@ -1,0 +1,25 @@
+<%= f.fields_for question.id.to_s do |f_datetime| %>
+  <!-- datetime -->
+  <div class="datetime-field">
+    <div class="row">
+      <div class="col-xs-6">
+        <%= f_datetime.input 'date', label: question.properties['label'], hint: question.properties['hint'], required: question.required, wrapper: :prepend do %>
+          <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+          <%= f_datetime.input_field 'date', as: :string, class: 'datepicker form-control' %>
+        <% end %>
+      </div>
+
+      <div class="col-xs-6">
+        <div class="hour-field pull-left">
+          <label class="select control-label" for="form_entry_answers_minutes">Hour</label>
+          <%= f_datetime.input_field 'hours', collection: ((0..23).to_a.map{|x| '%02d' % x }), include_blank: false, class: "form-control" %>
+        </div>
+        <div class="separator-field pull-left"><span>:</span></div>
+        <div class="minute-field pull-left">
+          <label class="select control-label" for="form_entry_answers_minutes">Minute</label>
+          <%= f_datetime.input_field 'minutes', collection: ((0..45).step(15).to_a.map{|x| '%02d' % x}), include_blank: false, class: "form-control" %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

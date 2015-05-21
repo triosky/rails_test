@@ -1,0 +1,37 @@
+<% compensation ||= OpenStruct.new({}) %>
+<%= fe.fields_for "#{question.id.to_s}", OpenStruct.new(compensation), index:"" do |f_row| %>
+  <div class="row compensation-entry">
+    <div class="col-xs-2 pr0">
+      <%= f_row.input_field :amount, as: :integer, class: 'form-control' %>
+    </div>
+
+    <div class="col-xs-2 pr0">
+      <%= f_row.input_field :currency, collection: question.properties['compensation_currencies'].map{|m| [m['label'], m['value']]}, class: 'form-control', prompt: t('.select') %>
+    </div>
+
+    <div class="col-xs-2">
+      <%= f_row.input_field :periods, collection: question.properties['compensation_periods'].map{|m| [m['label'], m['value']]}, class: 'form-control', prompt: t('.select') %>
+    </div>
+
+    <div class="col-xs-2 no-horizontal-padding">
+      <div class="input-group">
+        <div class="input-icon">
+          <span class="input-group-addon"><i class="pi pi-calendar"></i></span>
+          <%= f_row.text_field :date, class: 'form-control datepicker', 'data-date-format' => 'yyyy-MM-dd' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-4">
+      <div class="input-group alt">
+        <%= f_row.input_field :reason, class: 'form-control' %>
+        <div class="input-group-addon">
+          <button type="button" class="btn btn-link btn-delete-row" onclick="$(this).closest('.compensation-entry').remove()">
+          <i class="pi pi-minus text-danger"></i>
+        </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% end %>
