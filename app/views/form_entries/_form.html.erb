@@ -1,5 +1,0 @@
-<%= f.fields_for :answers, OpenStruct.new(entry.answers) do |builder| %>
-  <% entry.form.fields.each_with_index do |question, index| %>
-    <%= render "/private/form_entries/fields/#{question.field_type}", question: question, f: builder, index: index, entry: entry, answers: entry.answers %>
-  <% end %>
-<% end %>

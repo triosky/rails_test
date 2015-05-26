@@ -1,5 +1,0 @@
-<%= f.input question.id.to_s, collection: question.field_options.map{|x| [x.name, x.id]},
-                              label: question.properties['label'],
-                              hint: question.properties['hint'],
-                              required: question.required,
-                              prompt: question.properties['prompt'].present? ? question.properties['prompt'] : false %>

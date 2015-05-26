@@ -1,2 +1,0 @@
-<!-- checkbox -->
-<%= f.input question.id.to_s, as: :check_boxes, label: question.properties['label'], hint: question.properties['hint'], collection: question.field_options.map(&:name), required: question.required %>
