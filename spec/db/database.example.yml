@@ -1,0 +1,8 @@
+test:
+  adapter: postgresql
+  encoding: unicode
+  host: localhost
+  database: ts_props_test
+  username:
+  password:
+  pool: 5
