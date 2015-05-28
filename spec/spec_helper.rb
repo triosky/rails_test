@@ -1,4 +1,5 @@
 # Prereqs
+require 'fileutils'
 require 'yaml'
 
 # Dependencies
@@ -20,9 +21,16 @@ require 'ts_props'
 specs_root     = File.dirname(__FILE__)
 db_config_path = specs_root + '/db/database.yml'
 db_config      = YAML.load_file(db_config_path)
+log_dir        = File.expand_path('../log', specs_root)
+log_file       = log_dir + '/test.log'
+
+FileUtils.mkdir(log_dir) unless Dir.exists?(log_dir)
 
 ActiveRecord::Base.configurations = db_config
 ActiveRecord::Base.establish_connection(:test)
+ActiveRecord::Base.logger = Logger.new(log_file)
+
+# TODO: Remove timestamps from rails test logging
 
 #
 # RSPEC CONFIG
