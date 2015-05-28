@@ -41,4 +41,33 @@ RSpec.configure do |config|
   # MODULES
 
   config.include FactoryGirl::Syntax::Methods
+
+  # HOOKS
+
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with :truncation # force cleanup before any spec run
+
+    FactoryGirl.reload
+  end
+end
+
+#
+# TEST MODELS
+#
+
+class Form < ActiveRecord::Base
+  has_many :fields, class_name: 'FormField'
+  has_many :entries, class_name: 'FormEntry'
+
+  scope :with_fields, -> { joins(:fields).includes(:fields) }
+  scope :by_position, -> { order('position ASC') }
+end
+
+class FormField < ActiveRecord::Base
+  belongs_to :form
+end
+
+class FormEntry < ActiveRecord::Base
+  belongs_to :form
 end
