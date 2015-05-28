@@ -11,9 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 4) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
+
+  create_table "form_entries", force: :cascade do |t|
+    t.integer "form_id", null: false
+    t.hstore  "answers", null: false
+  end
+
+  create_table "form_fields", force: :cascade do |t|
+    t.integer "form_id",                    null: false
+    t.string  "name",                       null: false
+    t.string  "field_type",                 null: false
+    t.integer "position",                   null: false
+    t.boolean "required",   default: false, null: false
+    t.hstore  "properties",                 null: false
+  end
+
+  create_table "forms", force: :cascade do |t|
+  end
 
 end
