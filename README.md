@@ -7,7 +7,7 @@
 - ``cp spec/db/database.example.yml spec/db/database.yml``
 - edit database config to fit your needs
 - ``rake db:create db:migrate``
-- ``rspec`` or ``RSPEC_ALL rspec`` to skip specs filtering 
+- ``rspec`` or ``RSPEC_ALL=1 rspec`` to skip specs filtering 
 
 Rakefile contains part of ActiveRecord tasks useful for maintaining test db.
 
