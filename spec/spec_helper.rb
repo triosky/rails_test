@@ -1,5 +1,4 @@
 # Prereqs
-require 'fileutils'
 require 'yaml'
 
 # Dependencies
@@ -24,7 +23,7 @@ db_config      = YAML.load_file(db_config_path)
 log_dir        = File.expand_path('../log', specs_root)
 log_file       = log_dir + '/test.log'
 
-FileUtils.mkdir(log_dir) unless Dir.exists?(log_dir)
+Dir.mkdir(log_dir) unless Dir.exists?(log_dir)
 
 ActiveRecord::Base.configurations = db_config
 ActiveRecord::Base.establish_connection(:test)
